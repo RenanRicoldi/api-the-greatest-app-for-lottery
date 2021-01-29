@@ -12,7 +12,7 @@ class UserSchema extends Schema {
             table.string('password', 60).notNullable()
             table.boolean('verified').defaultTo(false)
             table.uuid('verified_token')
-            table.string('reset_token', 240)
+            table.uuid('reset_token')
             table.timestamp('reset_token_created_at')
             table.timestamps()
         })

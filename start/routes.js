@@ -21,6 +21,9 @@ Route.get('/', () => {
 })
 
 Route.post('users', 'UserController.store')
+Route.get('users/verify/:token', 'UserController.verify')
 Route.post('sessions', 'SessionController.store')
 
-Route.get('users/verify/:token', 'UserController.verify')
+Route.post('password-reset', 'ForgotPasswordController.store')
+Route.put('password-reset', 'ForgotPasswordController.update')
+
