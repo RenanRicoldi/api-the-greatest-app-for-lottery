@@ -29,3 +29,5 @@ Route.put('password-reset', 'ForgotPasswordController.update')
 
 Route.get('types', 'TypeController.index')
 
+Route.post('bets', 'BetController.store').middleware('auth')
+Route.get('bets', 'BetController.index').middleware('auth')
