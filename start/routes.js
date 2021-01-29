@@ -27,3 +27,5 @@ Route.post('sessions', 'SessionController.store')
 Route.post('password-reset', 'ForgotPasswordController.store')
 Route.put('password-reset', 'ForgotPasswordController.update')
 
+Route.get('types', 'TypeController.index')
+
