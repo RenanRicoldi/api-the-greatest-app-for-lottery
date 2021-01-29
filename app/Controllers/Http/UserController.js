@@ -19,7 +19,7 @@ class UserController {
             const verified_token = uuidv4()
             user = await User.create({ ...data, id: uuidv4(), verified_token }, trx)
 
-            await Mail.send('emails.verify', { name: data.name, link: `${Env.get('APP_URL')}/user/verify/${verified_token}` }, (message) => {
+            await Mail.send('emails.verify', { name: data.name, link: `${Env.get('APP_URL')}/users/verify/${verified_token}` }, (message) => {
                 message
                     .to(data.email)
                     .from('renan.ricoldi@luby.software','Renan Ricoldi | Luby Software Your Way')
@@ -32,6 +32,23 @@ class UserController {
         await trx.commit()
 
         return user
+    }
+
+    async verify({ response, params }) {
+        const token = params.token
+
+        try {
+            const user = await User.findByOrFail('verified_token', token)
+
+            user.verified = true
+            user.verified_token = null
+
+            await user.save()
+
+        } catch(error) {
+            throw new Error('User already verified or not registered.')
+        }
+        return response.redirect(Env.get('SITE_URL'))
     }
 }
 
