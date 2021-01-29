@@ -1,10 +1,10 @@
 'use strict'
 
-const Database = use('Database')
+const Type = use('App/Models/Type')
 
 class TypeController {
     async index() {
-        const types = await Database.select('*').from('types')
+        const types = await Type.all()
 
         return { types }
     }
