@@ -1,28 +1,43 @@
-# Adonis API application
+# Adonis API application for The Greatest App for Lottery
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+## Configuration
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+This API is configured with the following:
 
-## Setup
+ - Node.
+ - Npm or Yarn.
+ - Authentication Middleware.
+ - E-mail sending.
+ - CORS.
+ - Pg with Lucid ORM.
+ - Validator.
 
-Use the adonis command to install the blueprint
+## Database
+
+The database used is a docker image of Postgres SQL. 
+
+To create it run the following in your terminal:
 
 ```bash
-adonis new yardstick --api-only
+docker run --name adonis-postgres -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
+
+    docker exec -it adonis-postgres /bin/bash
+    psql postgres postgres -W #"The password is docker"
+    create database tgl;
+    quit
+    exit
+
+adonis migration:run
+adonis seed
 ```
 
-or manually clone the repo and then run `npm install`.
+## Running
 
+First create a .env file and copy the env.example, filling the emprty fields.
 
-### Migrations
+After run in terminal
 
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
+```bash
+    yarn
+    adonis serve --dev
 ```
